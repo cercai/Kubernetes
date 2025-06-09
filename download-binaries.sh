@@ -2,18 +2,14 @@
 
 readonly DOWNLOADS=downloads
 
-# TO BE DELETED
-rm -rf $DOWNLOADS
+sudo apt-get update
+sudo apt-get -y install \
+    wget \
+    curl \
+    vim \
+    openssl \
+    git
 
-# sudo apt-get update
-# sudo apt-get -y install \
-#     wget \
-#     curl \
-#     vim \
-#     openssl \
-#     git
-
-# git clone git@github.com:cercai/Kubernetes.git
 
 wget -q --show-progress \
   --https-only \
@@ -44,7 +40,6 @@ for file in $(ls $DOWNLOADS/*gz); do
 
   elif [[ "$file" =~ cni-plugins ]]; then
     tar xzf $file --directory $DOWNLOADS/cni
-    rm -rf $file
 
   fi
   rm $file
@@ -58,3 +53,6 @@ cp $DOWNLOADS/{kube-proxy,kubelet,runc} $DOWNLOADS/worker/
 mv $DOWNLOADS/{kubelet,runc} $DOWNLOADS/cp/
 
 rm $DOWNLOADS/kube-proxy
+
+chmod +x $DOWNLOADS/{client,cp,worker}/*
+sudo cp $DOWNLOADS/client/{kubectl,etcdctl,crictl} /usr/local/bin/
