@@ -4,8 +4,16 @@
 
 Clone the repository
 ```console
-$ git clone git@github.com:cercai/Kubernetes.git
+# Clone the repo
+$ git clone https://github.com/cercai/Kubernetes.git
 $ cd Kubernetes
+
+# Download the binaries
 $ ./download-binaries.sh
+
+# Make sure the clients are installed
+$ crictl --version
+$ etcdctl version
+$ kubectl version
 ```
 
